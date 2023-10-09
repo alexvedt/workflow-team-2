@@ -52,11 +52,13 @@ export default function HomePage() {
 
   if (isLoading) return <h1>Loading...</h1>;
 
-  if (error) return <h1>Something went wrong! {error?.message}</h1>;
+  if (error) return 
+  <div className="bg-red-500"> <h1 className="">Something wengfgfgt wrong!      {error?.message}</h1> </div>;
 
   return (
     <>
       <h1>Index/ Home Page</h1>
+
 
       <section>
         {posts.map((post) => (
