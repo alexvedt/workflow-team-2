@@ -1,5 +1,8 @@
 import { API_URL } from "./constants";
 
+const apiKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTI3NywibmFtZSI6ImFhYWFfdXNlcm5hbWUiLCJlbWFpbCI6ImFsZXguYWxleEBzdHVkLm5vcm9mZi5ubyIsImF2YXRhciI6bnVsbCwiYmFubmVyIjpudWxsLCJpYXQiOjE2OTY5MzgzOTR9.F6R7yeEXwnD2BoP3QlcUTfvZZkJ93_Ies0APr9Oos9w";
+
 /**
  * Helper function to add the
  * @param {Object} options - HTTP header options
@@ -11,10 +14,10 @@ function updateOptions(options) {
   if (localStorage.getItem("jwt")) {
     update.headers = {
       ...update.headers,
-      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      Authorization: `Bearer ${apiKey}`,
     };
   }
-
+  //**localStorage.getItem("jwt")*/
   return update;
 }
 
