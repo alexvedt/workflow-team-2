@@ -1,8 +1,9 @@
 import { API_URL } from "./constants";
 
-const apiKey =
+export const apiKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTI3NywibmFtZSI6ImFhYWFfdXNlcm5hbWUiLCJlbWFpbCI6ImFsZXguYWxleEBzdHVkLm5vcm9mZi5ubyIsImF2YXRhciI6bnVsbCwiYmFubmVyIjpudWxsLCJpYXQiOjE2OTY5MzgzOTR9.F6R7yeEXwnD2BoP3QlcUTfvZZkJ93_Ies0APr9Oos9w";
 
+export const baseURL = "https://api.noroff.dev/api/v1";
 /**
  * Helper function to add the
  * @param {Object} options - HTTP header options
