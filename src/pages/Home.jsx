@@ -54,11 +54,10 @@ export default function HomePage() {
 
   if (error) return 
   <div className="bg-red-500"> <h1 className="">Something wengfgfgt wrong!      {error?.message}</h1> </div>;
-
+  console.log(error, "error")
   return (
     <>
       <h1>Index/ Home Page</h1>
-
 
       <section>
         {posts.map((post) => (
