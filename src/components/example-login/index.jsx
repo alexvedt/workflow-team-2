@@ -8,6 +8,11 @@ function LoginForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
 
+  const [inputErrors, setInputErrors] = useState({
+    email: false,
+    password: false,
+  });
+
   const navigateToHome = () => {
     setTimeout(() => {
       navigate({ to: "/" });
@@ -16,6 +21,9 @@ function LoginForm() {
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
+
+    setError(null); // Resetting the error
+    setInputErrors({ email: false, password: false }); // Reset input errors
 
     const { email, password } = event.target.elements;
 
@@ -38,6 +46,24 @@ function LoginForm() {
 
       const data = await res.json();
 
+      if (!res.ok) {
+        if (data.message === "Username not found") {
+          setError({ message: "Username doesn't exist." });
+          setInputErrors({ email: true, password: false });
+        } else if (data.message === "Invalid password") {
+          setError({ message: "Wrong password." });
+          setInputErrors({ email: false, password: true });
+        } else {
+          setError({ message: "An unexpected error occurred." });
+        }
+        return;
+      }
+
+      if (typeof data.accessToken === "undefined") {
+        setError({ message: "Access token is not provided." });
+        return;
+      }
+
       localStorage.setItem("access_token", data.accessToken);
       setData(data);
       setIsSuccess(res.ok);
@@ -49,8 +75,6 @@ function LoginForm() {
       setIsLoading(false);
     }
   };
-
-  if (error) return <div>An error occured: {error?.message}</div>;
 
   return (
     <div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 bg-#111827 lg:px-8">
@@ -77,11 +101,12 @@ function LoginForm() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-white-900"
+                className={`block text-sm font-medium leading-6 ${
+                  inputErrors.email ? "text-red-500" : "text-white-900"
+                }`}
               >
                 Email address
               </label>
-
               <div className="mt-2">
                 <input
                   id="email"
@@ -90,21 +115,25 @@ function LoginForm() {
                   autoComplete="email"
                   required
                   defaultValue="first.last@stud.noroff.no"
-                  className="px-1 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className={`px-1 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+                    inputErrors.email ? "border-red-500" : ""
+                  }`}
                 />
               </div>
+              {inputErrors.email && (
+                <p className="text-red-500 mt-1">{error?.message}</p>
+              )}
             </div>
 
             <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-white-900"
-                >
-                  Password
-                </label>
-              </div>
-
+              <label
+                htmlFor="password"
+                className={`block text-sm font-medium leading-6 ${
+                  inputErrors.password ? "text-red-500" : "text-white-900"
+                }`}
+              >
+                Password
+              </label>
               <div className="mt-2">
                 <input
                   id="password"
@@ -113,9 +142,14 @@ function LoginForm() {
                   autoComplete="current-password"
                   required
                   defaultValue="UzI1NiIsInR5cCI"
-                  className="block w-full rounded-md border-0 px-1 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className={`block w-full rounded-md border-0 px-1 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+                    inputErrors.password ? "border-red-500" : ""
+                  }`}
                 />
               </div>
+              {inputErrors.password && (
+                <p className="text-red-500 mt-1">{error?.message}</p>
+              )}
             </div>
 
             <div>

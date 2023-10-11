@@ -3,8 +3,7 @@ import { useState } from "react";
 
 function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  // const [data, setData] = useState(null);
+  const [error, setError] = useState({});
   const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
 
@@ -14,18 +13,55 @@ function RegisterForm() {
     }, 2000);
   };
 
+  const validateEmail = (email) => {
+    const emailRegex =
+      /^(?:[a-zA-Z0-9._%+-]+@stud\.noroff\.no|[^@\s]+@noroff\.no)$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^.{8,}$/;
+    return passwordRegex.test(password);
+  };
+
   const handleOnSubmit = async (event) => {
     event.preventDefault();
 
-    const { email, password, name, avatar, banner } = event.target.elements;
+    const { email, password, name, avatar } = event.target.elements;
+    const nameValue = name.value;
+    const emailValue = email.value;
+    const passwordValue = password.value;
+
+    let fieldErrors = {};
+
+    if (!nameValue.match(/^[a-zA-Z0-9_]+$/)) {
+      fieldErrors.name =
+        "Name must not contain punctuation symbols apart from underscore (_).";
+    }
+
+    if (!validateEmail(emailValue)) {
+      fieldErrors.email =
+        "Invalid email address. Please use a valid stud.noroff.no or noroff.no email.";
+    }
+
+    if (!validatePassword(passwordValue)) {
+      fieldErrors.password = "Password must be at least 8 characters.";
+    }
+
+    // If there are errors, update state and exit function
+    if (Object.keys(fieldErrors).length > 0) {
+      setError(fieldErrors);
+      return;
+    }
 
     const payload = {
-      name: name.value, // Required
-      email: email.value, // Required
-      password: password.value, // Required
-      avatar: avatar?.value, // Optional
-      banner: banner?.value, // Optional
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+      avatar: avatar?.value,
     };
+
+    setIsLoading(true);
 
     try {
       const res = await fetch(
@@ -39,12 +75,14 @@ function RegisterForm() {
         }
       );
 
-      // const data = await res.json();
-
-      localStorage.setItem("email", email.value);
-      // setData(data);
-      setIsSuccess(res.ok);
-      navigateToHome();
+      const data = await res.json();
+      if (res.ok) {
+        setIsSuccess(true);
+        localStorage.setItem("email", emailValue);
+        navigateToHome();
+      } else {
+        setError({ general: data.message });
+      }
     } catch (error) {
       console.warn("An error occurred", error);
       setError(error);
@@ -52,8 +90,6 @@ function RegisterForm() {
       setIsLoading(false);
     }
   };
-
-  if (error) return <div>An error occurred: {error?.message}</div>;
 
   return (
     <div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 bg-#111827 lg:px-8">
@@ -99,6 +135,9 @@ function RegisterForm() {
                   className="px-1 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
+              {error.name && (
+                <p className="text-red-500 text-xs mt-2">{error.name}</p>
+              )}
             </div>
 
             <div>
@@ -115,24 +154,6 @@ function RegisterForm() {
                   name="avatar"
                   type="file"
                   autoComplete="avatar"
-                  className="px-1 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="banner"
-                className="block text-sm font-medium leading-6 text-white-900"
-              >
-                Banner
-              </label>
-
-              <div className="mt-2">
-                <input
-                  id="banner"
-                  name="banner"
-                  type="file"
                   className="px-1 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -159,6 +180,9 @@ function RegisterForm() {
                   className="px-1 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
+              {error.email && (
+                <p className="text-red-500 text-xs mt-2">{error.email}</p>
+              )}
             </div>
 
             <div>
@@ -182,6 +206,9 @@ function RegisterForm() {
                   className="block w-full rounded-md border-0 px-1 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
+              {error.password && (
+                <p className="text-red-500 text-xs mt-2">{error.password}</p>
+              )}
             </div>
 
             <div>
