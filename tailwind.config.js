@@ -9,6 +9,6 @@ export default {
   },
   plugins: [tailwindtypography, daisyui],
   daisyui: {
-    themes: ["light", "dark"],
+    themes: ["light", "dark", "luxury"],
   },
 };
