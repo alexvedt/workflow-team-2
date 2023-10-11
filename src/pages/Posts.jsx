@@ -1,6 +1,7 @@
 export default function PostsPage() {
   return (
     <>
+
       <div className="min-h-screen md:container md:mx-auto bg-base-100 flex flex-wrap justify-center">
         <div className="w-full md:w-1/3 p-2">
           <div className="card w-full h-[300px] md:h-auto md:w-4/5 glass">
