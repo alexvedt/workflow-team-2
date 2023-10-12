@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import Navigation from "../components/Navbar";
+import Navigation from "../components/navbar";
 
 export default function PostsPage() {
   const [liked, setLiked] = useState(false);

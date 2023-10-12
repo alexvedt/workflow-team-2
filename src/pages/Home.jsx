@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFetchPosts } from "../components/posts/fetchpost";
-import Navigation from "../components/Navbar";
+import Navigation from "../components/navbar";
 
 export default function PostsPage() {
   const { posts, isLoading, error, fetchData } = useFetchPosts();
