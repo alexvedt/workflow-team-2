@@ -2,7 +2,7 @@
  * Displays a single profile
  * @see https://docs.noroff.dev/social-endpoints/profiles
  */
-=======
+
 import { useState } from "react";
 import Navigation from "../components/Navbar";
 import { useFetchCurrentUserPosts } from "../components/posts/fetchpost";
