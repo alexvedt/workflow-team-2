@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useFetchCurrentUserPosts } from "../components/posts/fetchpost";
 import { PostForm } from "../components/posts/addpost";
+import Navigation from "../components/Navbar";
 
+/**
+ * Displays a single profile
+ * @see https://docs.noroff.dev/social-endpoints/profiles
+ */
 export default function ProfilePage() {
   const { posts, isLoading, error } = useFetchCurrentUserPosts();
   const [updatedPosts, setUpdatedPosts] = useState(posts);
@@ -23,6 +28,9 @@ export default function ProfilePage() {
 
   return (
     <>
+      <header>
+        <Navigation />
+      </header>
       <h1>Profile Page</h1>
       <PostForm onAddPost={handleAddPost} />
 

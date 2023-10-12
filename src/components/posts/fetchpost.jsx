@@ -23,6 +23,7 @@ export const useFetchPosts = () => {
             }
 
             const data = await response.json();
+            console.log(data, 'data');
 
             // Sort posts by created date
             const sortedPosts = sortPostsDescending(data);
