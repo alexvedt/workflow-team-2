@@ -7,7 +7,6 @@ import LoginForm from "../components/example-login";
 export default function LoginPage() {
   return (
     <>
-      <h1>Login Page</h1>
       <LoginForm />
     </>
   );
