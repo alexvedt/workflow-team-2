@@ -26,7 +26,7 @@ function RegisterForm() {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
 
-    const { email, password, name, avatar } = event.target.elements;
+    const { email, password, name } = event.target.elements;
 
     let fieldErrors = {};
 
@@ -50,30 +50,28 @@ function RegisterForm() {
     }
 
     // Create a FormData instance
-    const formData = new FormData();
-    formData.append("name", name.value);
-    formData.append("email", email.value);
-    formData.append("password", password.value);
-
-    // Attach the avatar if present
-    if (avatar.files[0]) {
-      formData.append("avatar", avatar.files[0]);
-    }
+    const requestData = {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+    };
 
     setIsLoading(true);
 
     try {
-      const res = await fetch(
+      const response = await fetch(
         "https://api.noroff.dev/api/v1/social/auth/register",
         {
           method: "POST",
-          body: formData, // Use formData as body
-          // No content-type header, it'll be set automatically with boundary parameter
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
         }
       );
 
-      const data = await res.json();
-      if (res.ok) {
+      const data = await response.json();
+      if (response.ok) {
         setIsSuccess(true);
         localStorage.setItem("email", email.value);
         navigateToHome();
@@ -135,26 +133,6 @@ function RegisterForm() {
               {error.name && (
                 <p className="text-red-500 text-xs mt-2">{error.name}</p>
               )}
-            </div>
-
-            <div>
-              <label
-                htmlFor="avatar"
-                className="block text-sm font-medium leading-6 text-white-900"
-              >
-                Avatar
-              </label>
-
-              <div className="mt-2">
-                <input
-                  key={Date.now()}
-                  id="avatar"
-                  name="avatar"
-                  type="file"
-                  autoComplete="avatar"
-                  className="px-1 block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
             </div>
 
             <div>
