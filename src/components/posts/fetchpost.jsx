@@ -22,12 +22,14 @@ export const useFetchPosts = () => {
             }
 
             const data = await response.json();
+            console.log(data, 'data');
 
             // Sort posts by created date
             const sortedPosts = data.sort((a, b) => new Date(b.created) - new Date(a.created));
 
             // Filter out posts with empty body
             const nonEmptyPosts = sortedPosts.filter(post => post.body.trim() !== '');
+
 
             // Limit to 9
             const limitedPosts = nonEmptyPosts.slice(0, 9);
@@ -42,3 +44,4 @@ export const useFetchPosts = () => {
 
     return { posts, isLoading, error, fetchData };
 };
+
