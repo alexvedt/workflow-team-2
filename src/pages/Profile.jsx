@@ -7,6 +7,7 @@ import Navigation from "../components/Navbar";
  * Displays a single profile
  * @see https://docs.noroff.dev/social-endpoints/profiles
  */
+
 export default function ProfilePage() {
   const { posts, isLoading, error } = useFetchCurrentUserPosts();
   const [updatedPosts, setUpdatedPosts] = useState(posts);
