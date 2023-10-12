@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFetchPosts } from "../components/posts/fetchpost";
-import Navbar from "../components/Navbar";
+import Navigation from "../components/Navbar";
 
 export default function PostsPage() {
   const { posts, isLoading, error, fetchData } = useFetchPosts();
@@ -34,7 +34,7 @@ export default function PostsPage() {
   return (
     <>
       <header>
-        <Navbar />
+        <Navigation />
       </header>
       <section id="feed " className="w-full bg-base-100">
       <div className="min-h-screen md:container md:mx-auto  flex sm:flex-col flex-wrap content-center justify-center overflow-x-hidden ">
