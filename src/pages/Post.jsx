@@ -1,5 +1,5 @@
 // import { useEffect, useState } from "react";
-import Navbar from "../components/navbar";
+import Navigation from "../components/navbar";
 
 // const initialPostState = {
 //   title: "No post found",
@@ -46,7 +46,7 @@ export default function SinglePostPage() {
   return (
     <>
       <header>
-        <Navbar />
+        <Navigation />
       </header>
       <div className="min-h-screen md:container md:mx-auto bg-base-100 flex justify-center">
         <div className="w-full md:w-2/3 p-2">

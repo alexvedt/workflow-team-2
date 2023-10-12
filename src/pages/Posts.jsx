@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import Navbar from "../components/Navbar";
+import Navigation from "../components/Navbar";
 
 export default function PostsPage() {
   const [liked, setLiked] = useState(false);
@@ -16,7 +16,7 @@ export default function PostsPage() {
   return (
     <>
       <header>
-        <Navbar />
+        <Navigation />
       </header>
       <div className="min-h-screen md:container md:mx-auto bg-base-100 flex flex-wrap justify-center">
         <div className="w-full md:w-1/3 p-2">
