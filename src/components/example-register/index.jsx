@@ -94,7 +94,7 @@ function RegisterForm() {
           alt="Your Company"
         />
         <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-center text-white-900">
-          Sign in to your account
+          Make a new account
         </h2>
       </div>
 
