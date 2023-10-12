@@ -23,43 +23,42 @@ function RegisterForm() {
     const passwordRegex = /^.{8,}$/;
     return passwordRegex.test(password);
   };
-
   const handleOnSubmit = async (event) => {
     event.preventDefault();
 
     const { email, password, name, avatar } = event.target.elements;
-    const nameValue = name.value;
-    const emailValue = email.value;
-    const passwordValue = password.value;
 
     let fieldErrors = {};
 
-    if (!nameValue.match(/^[a-zA-Z0-9_]+$/)) {
+    if (!name.value.match(/^[a-zA-Z0-9_]+$/)) {
       fieldErrors.name =
         "Name must not contain punctuation symbols apart from underscore (_).";
     }
 
-    if (!validateEmail(emailValue)) {
+    if (!validateEmail(email.value)) {
       fieldErrors.email =
         "Invalid email address. Please use a valid stud.noroff.no or noroff.no email.";
     }
 
-    if (!validatePassword(passwordValue)) {
+    if (!validatePassword(password.value)) {
       fieldErrors.password = "Password must be at least 8 characters.";
     }
 
-    // If there are errors, update state and exit function
     if (Object.keys(fieldErrors).length > 0) {
       setError(fieldErrors);
       return;
     }
 
-    const payload = {
-      name: nameValue,
-      email: emailValue,
-      password: passwordValue,
-      avatar: avatar?.value,
-    };
+    // Create a FormData instance
+    const formData = new FormData();
+    formData.append("name", name.value);
+    formData.append("email", email.value);
+    formData.append("password", password.value);
+
+    // Attach the avatar if present
+    if (avatar.files[0]) {
+      formData.append("avatar", avatar.files[0]);
+    }
 
     setIsLoading(true);
 
@@ -68,17 +67,15 @@ function RegisterForm() {
         "https://api.noroff.dev/api/v1/social/auth/register",
         {
           method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-            "Content-type": "application/json",
-          },
+          body: formData, // Use formData as body
+          // No content-type header, it'll be set automatically with boundary parameter
         }
       );
 
       const data = await res.json();
       if (res.ok) {
         setIsSuccess(true);
-        localStorage.setItem("email", emailValue);
+        localStorage.setItem("email", email.value);
         navigateToHome();
       } else {
         setError({ general: data.message });
@@ -150,6 +147,7 @@ function RegisterForm() {
 
               <div className="mt-2">
                 <input
+                  key={Date.now()}
                   id="avatar"
                   name="avatar"
                   type="file"
