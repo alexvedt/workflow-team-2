@@ -49,7 +49,6 @@ function RegisterForm() {
       return;
     }
 
-    // Create a FormData instance
     const requestData = {
       name: name.value,
       email: email.value,
