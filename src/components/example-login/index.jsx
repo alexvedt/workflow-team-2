@@ -1,6 +1,13 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
+
+//We need the userdata
+function extractUserData(data) {
+  const { name, accessToken } = data;
+  return { username: name, jwt: accessToken };
+}
+
 function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({});
@@ -55,6 +62,10 @@ function LoginForm() {
         setError({ message: "Access token is not provided." });
         return;
       }
+
+      const { username, jwt } = extractUserData(data);
+      localStorage.setItem("username", username);
+      localStorage.setItem("access_token", jwt);
 
       localStorage.setItem("access_token", data.accessToken);
       setData(data);

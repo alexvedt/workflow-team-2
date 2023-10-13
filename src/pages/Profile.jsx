@@ -4,7 +4,7 @@
 //  */
 
 import { useState } from "react";
-import Navigation from "../components/Navbar";
+import Navigation from "../components/navbar";
 import { useFetchCurrentUserPosts } from "../components/posts/fetchpost";
 import { PostForm } from "../components/posts/addpost";
 
