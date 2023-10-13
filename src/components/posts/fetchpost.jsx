@@ -46,7 +46,7 @@ export const useFetchPosts = () => {
     return { posts, isLoading, error, fetchData };
 };
 
-export const useFetchCurrentUserPosts = (userId) => {
+export const useFetchCurrentUserPosts = (username, jwt) => {
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -54,12 +54,11 @@ export const useFetchCurrentUserPosts = (userId) => {
     const fetchCurrentUserPosts = useCallback(async () => {
         try {
             setIsLoading(true);
-            const accessToken = apiKey;
-            const response = await fetch(`${baseURL}/social/posts?_author=${userId}`, {
-                method: 'GET',
+            const response = await fetch(`${baseURL}/social/profiles/${username}/posts`, {
+                method: "GET",
                 headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                }
+                    Authorization: `Bearer ${jwt}`,
+                },
             });
 
             if (!response.ok) {
@@ -83,13 +82,15 @@ export const useFetchCurrentUserPosts = (userId) => {
         } finally {
             setIsLoading(false);
         }
-    }, [userId]); // Include userId for profile page
+    }, [username, jwt]);
+
+    console.log(username);
 
     useEffect(() => {
-        if (userId) {
+        if (username && jwt) {
             fetchCurrentUserPosts();
         }
-    }, [userId, fetchCurrentUserPosts]);
+    }, [username, jwt, fetchCurrentUserPosts]);
 
-    return { posts, isLoading, error };
+    return { posts, isLoading, error, username };
 };

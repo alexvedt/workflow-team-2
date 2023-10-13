@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { apiKey, baseURL } from '../../lib/api';
 
-
 export function PostForm({ onAddPost }) {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [tags, setTags] = useState('');
     const [media, setMedia] = useState('');
+
+    const storedUsername = localStorage.getItem('username');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,7 +33,30 @@ export function PostForm({ onAddPost }) {
             }
 
             const newPost = await response.json();
-            onAddPost(newPost);
+
+            // Include correct author information
+            newPost.author = {
+                name: storedUsername
+            };
+
+            // Once the post is created, fetch the updated list
+            const updatedPostsResponse = await fetch(`${baseURL}/social/profiles/${storedUsername}/posts`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+
+            if (!updatedPostsResponse.ok) {
+                throw new Error(`HTTP error! status: ${updatedPostsResponse.status}`);
+            }
+
+            const updatedPosts = await updatedPostsResponse.json();
+
+            // Update the local state with the updated list of posts.
+            onAddPost(updatedPosts);
+
+            // Reset form fields
             setTitle('');
             setBody('');
             setTags('');

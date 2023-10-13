@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { useFetchPosts } from "../components/posts/fetchpost";
+import PostBtn from "../components/postbtn";
 import Navigation from "../components/navbar";
 
 export default function PostsPage() {
   const { posts, isLoading, error, fetchData } = useFetchPosts();
-  const [likedPosts, setLikedPosts] = useState({});
-  const [pulse, setPulse] = useState({});
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  const [likedPosts, setLikedPosts] = useState({});
+  const [pulse, setPulse] = useState({});
 
   const handleLike = (postId) => {
     setLikedPosts({
@@ -29,28 +31,27 @@ export default function PostsPage() {
   };
 
   if (isLoading) return <h1>Loading...</h1>;
+
   if (error)
     return (
       <div className="bg-red-500">
         <h1>Something went wrong! {error?.message}</h1>
       </div>
     );
-
   return (
     <>
       <header>
         <Navigation />
       </header>
-
       <section id="hero-home"></section>
-      <section id="feed " className="w-full bg-base-100  ">
+      <section id="feed " className="w-full bg-base-100">
         <div className="min-h-screen md:container md:mx-auto  flex sm:flex-col flex-wrap content-center justify-center overflow-x-hidden ">
           {posts.map((post) => (
             <div
               key={post.id}
               className="w-full md:w-2/3 p-2 mb-2.5 sm:w-10/12 flex content-center justify-center"
             >
-              <div className="card w-full max-w-[80%] h-[300px] md:h-auto md:w-4/5 glass bg-secondary ">
+              <div className="card w-full max-w-[80%] h-[300px] md:h-auto md:w-4/5 glass">
                 <div className="flex flex-row py-4">
                   <div className="avatar">
                     <div className="w-16 rounded-full mx-5">
@@ -61,7 +62,7 @@ export default function PostsPage() {
                     </div>
                   </div>
                   <p className="flex-end text-sm capitalize pr-2 py-4">
-                    {posts.author}
+                    By User1 10.10.23 12:22
                   </p>
                 </div>
                 <figure className="max-h-[200px] overflow-hidden">
@@ -72,10 +73,8 @@ export default function PostsPage() {
                   />
                 </figure>
                 <div className="card-body prose">
-                  <h2 className=" truncate max-w-full h-[40px]">
-                    <a className="" href={`/post/?id=${post.id}`}>
-                      {post?.title}
-                    </a>
+                  <h2 className="card-title truncate max-w-full h-[40px]">
+                    <a href={`/post/?id=${post.id}`}>{post?.title}</a>
                   </h2>
                   <p className="text-start h-[60px] overflow-hidden">
                     {post?.body.length > 50
@@ -84,10 +83,10 @@ export default function PostsPage() {
                   </p>
                   <div className="card-actions justify-between">
                     <a
-                      className="link link-hover link-neutral-content"
+                      className="link link-hover link-accent"
                       href={`/post/?id=${post.id}`}
                     >
-                      Read more..
+                      Read more
                     </a>
                     <button
                       onClick={() => handleLike(post.id)}
