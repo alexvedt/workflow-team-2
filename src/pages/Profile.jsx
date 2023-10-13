@@ -42,7 +42,6 @@ export default function ProfilePage() {
         {posts.map((post) => (
           <div key={post.id}>
             <div>By: {post.author}</div>
-            <br />
             <div>{post.title}</div>
             <div>{post.body}</div>
             <div>Tags: {post.tags.join(", ")}</div>
