@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFetchPosts } from "../components/posts/fetchpost";
 import PostBtn from "../components/postbtn";
-import Navigation from "../components/navbar";
+linuxzuck
 
 export default function PostsPage() {
   const { posts, isLoading, error, fetchData } = useFetchPosts();
