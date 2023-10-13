@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import Navigation from "../components/navbar";
 
 /**
  * Displays a single profile
@@ -7,9 +7,9 @@ import Navbar from "../components/Navbar";
 export default function ProfilePage() {
   return (
     <>
-    <header>
-    <Navbar />
-    </header>
+      <header>
+        <Navigation />
+      </header>
       <h1>Profile Page</h1>
     </>
   );
