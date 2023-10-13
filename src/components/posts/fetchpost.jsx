@@ -31,6 +31,7 @@ export const useFetchPosts = () => {
             // Filter out empty posts
             const nonEmptyPosts = getNewestNonEmptyPosts(sortedPosts);
 
+
             // Limit to 9
             const limitedPosts = limitPosts(nonEmptyPosts, 9);
 
