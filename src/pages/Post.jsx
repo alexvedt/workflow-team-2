@@ -1,47 +1,80 @@
 // import { useEffect, useState } from "react";
+
+import { useState, useEffect } from "react";
 import Navigation from "../components/navbar";
+import { apiKey } from "../lib/api";
 
-// const initialPostState = {
-//   title: "No post found",
-//   body: "Nothing to see here",
-//   userId: null,
-//   id: null,
-// };
+const initialPostState = {
+  title: "No post found",
+  body: "Nothing to see here",
+  userId: null,
+  id: null,
+};
 
-// /**
-//  * Displays a single post
-//  * @see https://docs.noroff.dev/social-endpoints/posts
-//  */
-// export default function PostPage() {
-//   const [post, setPost] = useState(initialPostState);
+export default function PostPage() {
+  const [post, setPost] = useState(initialPostState);
+  const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         // TIP: Get the ID from the search params in the URL
-//         // TIP: Fetch the post from the API using the ID
-//         // TIP: Set the post in state
-//       } catch (error) {
-//         // TIP: Handle errors from the API
-//       } finally {
-//         // TIP: Set loading to false
-//       }
-//     };
+  useEffect(() => {
+    console.log("useEffect", window.location.search);
+    const fetchData = async () => {
+      try {
+        setLoading(true);
 
-//     fetchData();
-//   }, []);
+        const searchQuery = window.location.search;
+        console.log("searchparams", searchQuery);
+        const url = new URLSearchParams(searchQuery);
+        const id = url.get("id");
+        console.log(id);
+        const accessToken = apiKey;
+        const res = await fetch(
+          `https://api.noroff.dev/api/v1/social/posts/${id}?_author=true`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        );
+        console.log(res, url, id, accessToken);
 
-//   return (
-//     <>
-//       <h1>A single post</h1>
-//       <section>
-//         <h2>{post?.title}</h2>
-//       </section>
-//     </>
-//   );
-// }
+        const json = await res.json();
+        setPost(json);
+        console.log(json);
+      } catch (error) {
+        setError("Failed to fetch post");
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchData();
+  }, []);
 
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
+  console.log(post, "post");
+
+  return (
+    <>
+      <Navigation />
+      <h1>{post.title ? post.title : "Loading..."}</h1>
+    </>
+  );
+
+  //   return (
+  //     <>
+  //       <h1>A single post</h1>
+  //       <section>
+  //         <h2>{post?.title}</h2>
+  //       </section>
+  //     </>
+  //   );
+  // }
+
+  /*
 export default function SinglePostPage() {
   return (
     <>
@@ -79,7 +112,7 @@ export default function SinglePostPage() {
       <button type="submit" className="btn btn-primary h-4">
         Post comment
       </button>
-      {/* Additional buttons and SVG icons here */}
+
     </div>
   </div>
 </form>
@@ -88,4 +121,6 @@ export default function SinglePostPage() {
       </div>
     </>
   );
+}
+*/
 }
