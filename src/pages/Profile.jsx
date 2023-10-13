@@ -3,11 +3,10 @@
  * @see https://docs.noroff.dev/social-endpoints/profiles
  */
 
-import { useState } from "react";
 import Navigation from "../components/navbar";
+import { useState } from "react";
 import { useFetchCurrentUserPosts } from "../components/posts/fetchpost";
 import { PostForm } from "../components/posts/addpost";
-
 
 export default function ProfilePage() {
   const { posts, isLoading, error } = useFetchCurrentUserPosts();
@@ -30,9 +29,10 @@ export default function ProfilePage() {
 
   return (
     <>
-    <header>
-    <Navigation />
-    </header>
+      <header>
+        <Navigation />
+      </header>
+
       <h1>Profile Page</h1>
       <PostForm onAddPost={handleAddPost} />
 
