@@ -8,7 +8,10 @@ export default {
   theme: {
     extend: {
       backgroundColor: {
-        'custom-orange': '#FF9067',
+        'custom-aqua': '#21b2a6',
+      },
+      textColor: {
+        'custom-aqua': '#21b2a6',
       },
       minWidth: {
         '50': '50%',

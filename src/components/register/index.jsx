@@ -86,14 +86,14 @@ function RegisterForm() {
   };
 
   return (
-    <div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 bg-#111827 lg:px-8">
+    <div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 bg-custom lg:px-8 card w-full max-w-[100%] h-[300px] md:h-auto  glass">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="w-auto h-10 mx-auto"
           src="../src/assets/NoHoverLogo.svg"
           alt="Your Company"
         />
-        <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-center text-white-900">
+        <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-center text-custom-aqua">
           Make a new account
         </h2>
       </div>
@@ -101,7 +101,7 @@ function RegisterForm() {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         {isSuccess ? (
           <section>
-            <p className="text-center text-green-900">
+            <p className="text-center text-green-600">
               👋 Hi {localStorage.getItem("email")}. You will now redirect to
               the login page!
             </p>
@@ -111,7 +111,7 @@ function RegisterForm() {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium leading-6 text-white-900"
+                className="block text-sm font-medium leading-6 text-custom-aqua"
               >
                 Name
               </label>
@@ -137,7 +137,7 @@ function RegisterForm() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-white-900"
+                className="block text-sm font-medium leading-6 text-custom-aqua"
               >
                 Email address
               </label>
@@ -164,7 +164,7 @@ function RegisterForm() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-white-900"
+                  className="block text-sm font-medium leading-6 text-custom-aqua"
                 >
                   Password
                 </label>
@@ -190,7 +190,7 @@ function RegisterForm() {
               <button
                 disabled={isLoading}
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-custom-aqua px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 {isLoading ? "Registering" : "Sign up"}
               </button>
@@ -202,7 +202,7 @@ function RegisterForm() {
           Already a member?{" "}
           <a
             href="/login"
-            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            className="font-semibold leading-6 text-custom-aqua hover:text-indigo-500"
           >
             Sign in
           </a>
