@@ -1,7 +1,7 @@
 // import { useEffect, useState } from "react";
 
 import { useState, useEffect } from "react";
-import Navigation from "../components/navbar";
+import Navigation from '../components/navbar';
 import { apiKey } from "../lib/api";
 
 const initialPostState = {

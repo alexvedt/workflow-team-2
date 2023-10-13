@@ -1,7 +1,7 @@
-/**
- * Displays a single profile
- * @see https://docs.noroff.dev/social-endpoints/profiles
- */
+// /**
+//  * Displays a single profile
+//  * @see https://docs.noroff.dev/social-endpoints/profiles
+//  */
 
 import Navigation from "../components/navbar";
 import { useState } from "react";
@@ -9,8 +9,11 @@ import { useFetchCurrentUserPosts } from "../components/posts/fetchpost";
 import { PostForm } from "../components/posts/addpost";
 
 export default function ProfilePage() {
-  const { posts, isLoading, error } = useFetchCurrentUserPosts();
-  const [updatedPosts, setUpdatedPosts] = useState(posts);
+  const storedUsername = localStorage.getItem("username");
+  const storedAccessToken = localStorage.getItem("access_token");
+
+  const { posts, isLoading, error } = useFetchCurrentUserPosts(storedUsername, storedAccessToken);
+  const [updatedPosts, setUpdatedPosts] = useState([]);
 
   const handleAddPost = (newPost) => {
     const updatedPosts = [newPost, ...posts];
@@ -32,13 +35,19 @@ export default function ProfilePage() {
       <header>
         <Navigation />
       </header>
-
       <h1>Profile Page</h1>
       <PostForm onAddPost={handleAddPost} />
-
       <section>
         {posts.map((post) => (
-          <div key={post.id}>{post?.title}</div>
+          <div key={post.id}>
+            <div>By: {post.author}</div>
+            <div>{post.title}</div>
+            <div>{post.body}</div>
+            <div>Tags: {post.tags.join(", ")}</div>
+            <div>{post.media}</div>
+            <div>Created: {post.created}</div>
+            <div>Updated: {post.updated}</div>
+          </div>
         ))}
       </section>
     </>

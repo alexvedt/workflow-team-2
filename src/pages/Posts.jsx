@@ -1,5 +1,5 @@
 
-import  { useState } from 'react';
+import { useState } from 'react';
 import Navigation from "../components/navbar";
 
 
@@ -54,9 +54,8 @@ export default function PostsPage() {
                 <div className="card-actions justify-end">
                   <button
                     onClick={handleLike}
-                    className={`focus:outline-none ${
-                      pulse ? "animate-pulse" : ""
-                    }`}
+                    className={`focus:outline-none ${pulse ? "animate-pulse" : ""
+                      }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
