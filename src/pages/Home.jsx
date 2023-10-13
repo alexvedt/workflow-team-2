@@ -43,14 +43,14 @@ export default function PostsPage() {
       </header>
 
       <section id="hero-home"></section>
-      <section id="feed " className="w-full bg-base-100">
+      <section id="feed " className="w-full bg-base-100  ">
         <div className="min-h-screen md:container md:mx-auto  flex sm:flex-col flex-wrap content-center justify-center overflow-x-hidden ">
           {posts.map((post) => (
             <div
               key={post.id}
               className="w-full md:w-2/3 p-2 mb-2.5 sm:w-10/12 flex content-center justify-center"
             >
-              <div className="card w-full max-w-[80%] h-[300px] md:h-auto md:w-4/5 glass">
+              <div className="card w-full max-w-[80%] h-[300px] md:h-auto md:w-4/5 glass bg-secondary ">
                 <div className="flex flex-row py-4">
                   <div className="avatar">
                     <div className="w-16 rounded-full mx-5">
@@ -72,8 +72,10 @@ export default function PostsPage() {
                   />
                 </figure>
                 <div className="card-body prose">
-                  <h2 className="card-title truncate max-w-full h-[40px]">
-                    <a href={`/post/?id=${post.id}`}>{post?.title}</a>
+                  <h2 className=" truncate max-w-full h-[40px]">
+                    <a className="" href={`/post/?id=${post.id}`}>
+                      {post?.title}
+                    </a>
                   </h2>
                   <p className="text-start h-[60px] overflow-hidden">
                     {post?.body.length > 50
@@ -82,10 +84,10 @@ export default function PostsPage() {
                   </p>
                   <div className="card-actions justify-between">
                     <a
-                      className="link link-hover link-accent"
+                      className="link link-hover link-neutral-content"
                       href={`/post/?id=${post.id}`}
                     >
-                      Read more
+                      Read more..
                     </a>
                     <button
                       onClick={() => handleLike(post.id)}
