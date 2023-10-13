@@ -3,11 +3,10 @@
 //  * @see https://docs.noroff.dev/social-endpoints/profiles
 //  */
 
+import Navigation from "../components/navbar";
 import { useState } from "react";
-import Navigation from '../components/navbar';
 import { useFetchCurrentUserPosts } from "../components/posts/fetchpost";
 import { PostForm } from "../components/posts/addpost";
-
 
 export default function ProfilePage() {
   const storedUsername = localStorage.getItem("username");
