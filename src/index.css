@@ -41,6 +41,13 @@ body {
     "footer";
 }
 
+p {
+color: white;
+}
+
+
+
+
 header {
   grid-area: header;
 }

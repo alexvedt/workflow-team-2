@@ -1,7 +1,5 @@
-
-import { useState } from 'react';
+import { useState } from "react";
 import Navigation from "../components/navbar";
-
 
 export default function PostsPage() {
   const [liked, setLiked] = useState(false);
@@ -20,7 +18,7 @@ export default function PostsPage() {
       <header>
         <Navigation />
       </header>
-      <div className="min-h-screen md:container md:mx-auto bg-base-100 flex flex-wrap justify-center">
+      <div className="min-h-screen md:container md:mx-auto bg-white flex flex-wrap justify-center">
         <div className="w-full md:w-1/3 p-2">
           <div className="card w-full h-[300px] md:h-auto md:w-4/5 glass">
             <div className="flex flex-row py-4">
@@ -54,8 +52,9 @@ export default function PostsPage() {
                 <div className="card-actions justify-end">
                   <button
                     onClick={handleLike}
-                    className={`focus:outline-none ${pulse ? "animate-pulse" : ""
-                      }`}
+                    className={`focus:outline-none ${
+                      pulse ? "animate-pulse" : ""
+                    }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
