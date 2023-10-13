@@ -4,7 +4,7 @@
 //  */
 
 import { useState } from "react";
-linuxzuck
+import Navigation from '../components/navbar';
 import { useFetchCurrentUserPosts } from "../components/posts/fetchpost";
 import { PostForm } from "../components/posts/addpost";
 
