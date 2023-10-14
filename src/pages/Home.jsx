@@ -41,6 +41,8 @@ export default function PostsPage() {
 
       <section id="hero-home">
 
+        <PostBtn />
+
       </section>
       <section id="feed " className="w-full bg-base-100">
         <div className="min-h-screen md:container md:mx-auto  flex sm:flex-col flex-wrap content-center justify-center overflow-x-hidden ">
