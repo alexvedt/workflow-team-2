@@ -1,7 +1,7 @@
 // import { useEffect, useState } from "react";
 
 import { useState, useEffect } from "react";
-import Navigation from '../components/navbar';
+import Navigation from "../components/navbar";
 import { apiKey } from "../lib/api";
 
 const initialPostState = {
@@ -55,12 +55,48 @@ export default function PostPage() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  console.log(post, "post");
-
   return (
     <>
       <Navigation />
-      <h1>{post.title ? post.title : "Loading..."}</h1>
+      <section id="feed " className="w-full bg-base-100">
+        <div className="min-h-screen md:container md:mx-auto  flex sm:flex-col flex-wrap content-center justify-center overflow-x-hidden ">
+          <div
+            key={post.id}
+            className="w-full md:w-2/3 p-2 mb-2.5 sm:w-10/12 flex content-center justify-center"
+          >
+            <div className="card w-full max-w-[80%] h-[300px] md:h-auto md:w-4/5 glass">
+              <div className="flex flex-row py-4">
+                <div className="avatar">
+                  <div className="w-16 rounded-full mx-5">
+                    <img
+                      className="object-cover w-full h-full"
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"
+                    />
+                  </div>
+                </div>
+                <p className="flex-end text-sm capitalize pr-2 py-4">
+                  {post.author?.name || "Anonymous"}
+                </p>
+              </div>
+              <figure className="max-h-[200px] overflow-hidden">
+                <img
+                  className="object-cover w-full h-full"
+                  src="https://source.unsplash.com/random"
+                  alt="!"
+                />
+              </figure>
+              <div className="card-body prose">
+                <h2 className="card-title truncate max-w-full h-[40px]">
+                  <a href={`/post/?id=${post.id}`}>{post?.title}</a>
+                </h2>
+                <p className="text-start h-[60px] overflow-hidden">
+                  {post?.body}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 
