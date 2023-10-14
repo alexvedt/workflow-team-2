@@ -1,13 +1,11 @@
+import './postbtn.css';
+
 export default function PostBtn() {
     return (
-        <div className="postbtn">
-            <div className="postbtn__container">
-                <div className="postbtn__container--btn">
-                    <button className="btn btn-primary btn-circle btn-l">
-
-                    </button>
-                </div>
-            </div>
+        <div className="postbtn-container">
+            <button id="PostBtn" className="add-post-btn">
+                <img className='btn-icon' src="../src/assets/btn-icon.png" alt="" />
+            </button>
         </div>
     );
 }

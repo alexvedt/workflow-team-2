@@ -44,30 +44,7 @@ export default function PostsPage() {
         <Navigation />
       </header>
       <section id="hero-home">
-        <div className="heading text-center font-bold text-2xl m-5 text-primary">
-          New Post
-          <div className="glass editor mx-auto w-10/12 flex flex-col text-gray-800 p-4 shadow-lg max-w-2xl bg-base-100 rounded-2xl">
-            <input
-              className="title bg-transparent border-b border-secondary  p-2 mb-4 outline-none rounded"
-              spellCheck="false"
-              placeholder="Title"
-              type="text"
-            />
-            <textarea
-              className="description bg-transparent p-3 h-60outline-none rounded"
-              spellCheck="false"
-              placeholder="Share something here..."
-            ></textarea>
-            <div className="buttons flex">
-              <div className="btn border bg-base-100 border-base-100 p-1 px-4 font-semibold cursor-pointer ml-auto rounded-2xl hover:rounded-none transition-all ease-in-out duration-300">
-                Cancel
-              </div>
-              <div className="btn border border-secondary p-1 px-4 font-semibold cursor-pointer ml-2 bg-secondary rounded-2xl hover:rounded transition-all ease-in-out duration-300">
-                Post
-              </div>
-            </div>
-          </div>
-        </div>
+staging
       </section>
       <section id="feed " className="w-full bg-base-100">
         <div className="min-h-screen md:container md:mx-auto  flex sm:flex-col flex-wrap content-center justify-center overflow-x-hidden ">
