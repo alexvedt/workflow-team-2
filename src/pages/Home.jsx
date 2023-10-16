@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useFetchPosts } from "../components/posts/fetchpost";
-import PostBtn from "../components/postbtn";
 import Navigation from "../components/navbar";
 
 export default function PostsPage() {
@@ -44,7 +43,7 @@ export default function PostsPage() {
         <Navigation />
       </header>
       <section id="hero-home">
-staging
+        staging
       </section>
       <section id="feed " className="w-full bg-base-100">
         <div className="min-h-screen md:container md:mx-auto  flex sm:flex-col flex-wrap content-center justify-center overflow-x-hidden ">
@@ -92,9 +91,8 @@ staging
                     </a>
                     <button
                       onClick={() => handleLike(post.id)}
-                      className={`focus:outline-none ${
-                        pulse[post.id] ? "animate-pulse" : ""
-                      }`}
+                      className={`focus:outline-none ${pulse[post.id] ? "animate-pulse" : ""
+                        }`}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
