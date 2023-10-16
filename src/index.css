@@ -42,11 +42,8 @@ body {
 }
 
 p {
-color: white;
+  color: white;
 }
-
-
-
 
 header {
   grid-area: header;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFetchPosts } from "../components/posts/fetchpost";
 import Navigation from "../components/navbar";
+import PostForm from "../components/posts/addpost";
 
 export default function PostsPage() {
   const { posts, isLoading, error, fetchData } = useFetchPosts();
@@ -33,7 +34,7 @@ export default function PostsPage() {
 
   if (error)
     return (
-      <div className="bg-red-500">
+      <div className="bg-error">
         <h1>Something went wrong! {error?.message}</h1>
       </div>
     );
@@ -42,17 +43,18 @@ export default function PostsPage() {
       <header>
         <Navigation />
       </header>
-      <section id="hero-home">
-        staging
-      </section>
+      <section id="hero-home"></section>
       <section id="feed " className="w-full bg-base-100">
+        <PostForm />
         <div className="min-h-screen md:container md:mx-auto  flex sm:flex-col flex-wrap content-center justify-center overflow-x-hidden ">
+          <h1>Feed..</h1>
+
           {posts.map((post) => (
             <div
               key={post.id}
-              className="w-full md:w-2/3 p-2 mb-2.5 sm:w-10/12 flex content-center justify-center"
+              className="w-full min-h- p-2 mb-2.5 sm:w-10/12 flex content-center justify-center"
             >
-              <div className="card w-full max-w-[80%] h-[300px] md:h-auto md:w-4/5 glass">
+              <div className="card w-full max-w-[80%] h-[400px] md:h-auto md:w-4/5 glass">
                 <div className="flex flex-row py-4">
                   <div className="avatar">
                     <div className="w-16 rounded-full mx-5">
@@ -73,7 +75,7 @@ export default function PostsPage() {
                     alt="!"
                   />
                 </figure>
-                <div className="card-body prose">
+                <div className="card-body prose ">
                   <h2 className="card-title truncate max-w-full h-[40px]">
                     <a href={`/post/?id=${post.id}`}>{post?.title}</a>
                   </h2>
@@ -91,8 +93,9 @@ export default function PostsPage() {
                     </a>
                     <button
                       onClick={() => handleLike(post.id)}
-                      className={`focus:outline-none ${pulse[post.id] ? "animate-pulse" : ""
-                        }`}
+                      className={`focus:outline-none ${
+                        pulse[post.id] ? "animate-pulse" : ""
+                      }`}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
