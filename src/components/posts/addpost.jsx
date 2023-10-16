@@ -16,7 +16,8 @@ export default function PostForm({ onAddPost }) {
     e.preventDefault();
 
     try {
-      const accessToken = localStorage.getItem("access_token");
+      const accessToken =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTkyNCwibmFtZSI6InZpZmlrc2EiLCJlbWFpbCI6Ijg5MTc3MzMtbGFzdEBzdHVkLm5vcm9mZi5ubyIsImF2YXRhciI6bnVsbCwiYmFubmVyIjpudWxsLCJpYXQiOjE2OTc0ODY5MTJ9.mUmdtDvnQmeMm7nMR_5mUS8kLkZYQ0NGsNWPX66q6G4";
       const response = await fetch(`${baseURL}/social/posts`, {
         method: "POST",
         headers: {
