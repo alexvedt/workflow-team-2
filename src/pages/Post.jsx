@@ -115,7 +115,7 @@ export default function PostPage() {
     );
 
     if (res.status === 204) {
-      // Post successfully deleted, redirect or show a message
+      window.location.reload();
     } else {
       setError("Failed to delete post");
     }
