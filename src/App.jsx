@@ -2,9 +2,11 @@ import { Outlet } from "@tanstack/react-router";
 import "./App.css";
 
 function App() {
+  if (window.location.pathname === "/") {
+    window.location.href = "/register";
+  }
   return (
     <>
-
       <main>
         <Outlet />
       </main>
