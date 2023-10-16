@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { apiKey, baseURL } from '../../lib/api';
+import StyledPostForm from '../postform';
+import PropTypes from 'prop-types';
 
 export function PostForm({ onAddPost }) {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [tags, setTags] = useState('');
     const [media, setMedia] = useState('');
+    const [author, setAuthor] = useState('');
 
     const storedUsername = localStorage.getItem('username');
 
@@ -25,6 +28,7 @@ export function PostForm({ onAddPost }) {
                     body,
                     tags: tags.split(',').map((tag) => tag.trim()),
                     media,
+                    author,
                 }),
             });
 
@@ -61,28 +65,28 @@ export function PostForm({ onAddPost }) {
             setBody('');
             setTags('');
             setMedia('');
+            setAuthor('');
         } catch (error) {
             console.error('Error:', error);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-            </div>
-            <div>
-                <textarea placeholder="Body" value={body} onChange={(e) => setBody(e.target.value)} />
-            </div>
-            <div>
-                <input type="text" placeholder="Tags (comma-separated)" value={tags} onChange={(e) => setTags(e.target.value)} />
-            </div>
-            <div>
-                <input type="text" placeholder="Media URL" value={media} onChange={(e) => setMedia(e.target.value)} />
-            </div>
-            <div>
-                <button type="submit">Add Post</button>
-            </div>
-        </form>
+        <StyledPostForm
+            onSubmit={handleSubmit}
+            title={title}
+            body={body}
+            tags={tags}
+            media={media}
+            setTitle={setTitle}
+            setBody={setBody}
+            setTags={setTags}
+            setMedia={setMedia}
+            handleSubmit={handleSubmit}
+        />
     );
 }
+
+PostForm.propTypes = {
+    onAddPost: PropTypes.func.isRequired,
+};
