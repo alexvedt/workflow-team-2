@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 async function fetchUserPosts(user_name, token) {
   try {
     const response = await fetch(
-      `https://api.noroff.dev/api/v1/social/profiles/${user_name}?_posts=true`,
+      `https://api.noroff.dev/api/v1/social/profiles/${user_name}?_posts`,
       {
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -79,6 +80,9 @@ export default function Profile() {
       });
     }
   }, [token, user_name]);
+  useEffect(() => {
+    console.log("Current posts:", posts);
+  }, [posts]);
 
   return (
     <>
@@ -126,7 +130,7 @@ export default function Profile() {
         <div>
           <h2>User Posts</h2>
           {posts.map((post) => (
-            <div key={post.id}>
+            <div key={post._author}>
               <h3>{post.title}</h3>
               <p>{post.body}</p>
               {/* ... other post properties */}

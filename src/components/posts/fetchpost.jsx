@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { apiKey, baseURL } from "../../lib/api";
+import { baseURL } from "../../lib/api";
 import {
   getNewestNonEmptyPosts,
   sortPostsDescending,
@@ -14,7 +14,7 @@ export const useFetchPosts = () => {
   const fetchData = useCallback(async () => {
     try {
       setIsLoading(true);
-      const accessToken = apiKey;
+      const accessToken = localStorage.getItem("access_token");
       const response = await fetch(`${baseURL}/social/posts`, {
         method: "GET",
         headers: {

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Navigation from "../components/navbar";
-import { apiKey } from "../lib/api";
 
 const initialPostState = {
   title: "No post found",
@@ -27,7 +26,7 @@ export default function PostPage() {
         const url = new URLSearchParams(searchQuery);
         const id = url.get("id");
         console.log(id);
-        const accessToken = apiKey;
+        const accessToken = localStorage.getItem("access_token");
         const res = await fetch(
           `https://api.noroff.dev/api/v1/social/posts/${id}?_author=true`,
           {
@@ -38,6 +37,7 @@ export default function PostPage() {
           }
         );
         console.log(res, url, id, accessToken);
+        console.log(accessToken);
 
         const json = await res.json();
         setPost(json);
@@ -75,7 +75,7 @@ export default function PostPage() {
                   </div>
                 </div>
                 <p className="flex-end text-sm capitalize pr-2 py-4">
-                  {post.author?.name || "Anonymous"}
+                  {post.author?.name || "Unknown"}
                 </p>
               </div>
               <figure className="max-h-[200px] overflow-hidden">

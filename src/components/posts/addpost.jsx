@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { apiKey, baseURL } from "../../lib/api";
+import { baseURL } from "../../lib/api";
 import StyledPostForm from "../postform";
 import PropTypes from "prop-types";
 
@@ -10,13 +10,13 @@ export default function PostForm({ onAddPost }) {
   const [media, setMedia] = useState("");
   const [author, setAuthor] = useState("");
 
-  const storedUsername = localStorage.getItem("username");
+  const storedUsername = localStorage.getItem("user_name");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const accessToken = apiKey;
+      const accessToken = localStorage.getItem("access_token");
       const response = await fetch(`${baseURL}/social/posts`, {
         method: "POST",
         headers: {
