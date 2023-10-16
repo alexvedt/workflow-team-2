@@ -84,7 +84,7 @@ export default function ExampleProfiles() {
               key={profile?.name}
               className="w-full md:w-2/3 p-2 mb-2.5 sm:w-10/12 flex content-center justify-center"
             >
-              <div className="card w-full max-w-[80%] h-[400px] md:h-auto md:w-4/5 glass">
+              <div className="card w-2/3 h-auto md:w-4/5 glass">
                 <div className="flex flex-row py-4">
                   <div className="avatar">
                     <div className="w-16 rounded-full mx-5">
@@ -96,32 +96,29 @@ export default function ExampleProfiles() {
                     </div>
                   </div>
                   <p className="flex-end text-sm capitalize pr-2 py-4">
-                    {profile?.name}
-                  </p>
-                </div>
-                <div className="card-body prose">
-                  <h2 className="card-title truncate max-w-full h-[40px]">
                     <Link
                       to={`/profiles/${profile.name}?profileid=${profile.name}`}
                     >
                       {profile?.name}
                     </Link>
-                  </h2>
-                  <p className="text-start h-[60px] overflow-hidden">
-                    {profile?.email}
                   </p>
                 </div>
-                <div className="card-footer flex justify-end">
-                  <button
-                    onClick={() => toggleFollow(profile.name)}
-                    className={`mt-2 px-4 py-2 rounded ${
-                      followedProfiles[profile.name]
-                        ? "bg-blue-500"
-                        : "bg-gray-400"
-                    }`}
-                  >
-                    {followedProfiles[profile.name] ? "Unfollow" : "Follow"}
-                  </button>
+                <div className="card-body prose">
+                  <div className="flex flex-col sm:flex-row items-center justify-between">
+                    <p className="text-start flex-grow mb-2 sm:mb-0">
+                      {profile?.email}
+                    </p>
+                    <button
+                      onClick={() => toggleFollow(profile.name)}
+                      className={`mt-2 px-4 py-2 rounded ${
+                        followedProfiles[profile.name]
+                          ? "bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    >
+                      {followedProfiles[profile.name] ? "Unfollow" : "Follow"}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
