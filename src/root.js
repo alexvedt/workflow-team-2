@@ -16,7 +16,7 @@ const rootRoute = new RootRoute({
 
 const indexRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: "/",
+  path: "/explore",
   component: HomePage,
 });
 

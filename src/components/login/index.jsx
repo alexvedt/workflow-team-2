@@ -10,7 +10,7 @@ function LoginForm() {
 
   const navigateToHome = () => {
     setTimeout(() => {
-      navigate({ to: "/" });
+      navigate({ to: "/explore" });
     }, 2000);
   };
 
