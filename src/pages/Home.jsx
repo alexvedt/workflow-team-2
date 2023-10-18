@@ -12,6 +12,8 @@ export default function PostsPage() {
 
   const [likedPosts, setLikedPosts] = useState({});
   const [pulse, setPulse] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterUser, setFilterUser] = useState("");
 
   const handleLike = (postId) => {
     setLikedPosts({
@@ -38,6 +40,22 @@ export default function PostsPage() {
         <h1>Something went wrong! {error?.message}</h1>
       </div>
     );
+
+  const filteredPosts = posts.filter((post) => {
+    const matchesSearch = post.body
+
+      .toLowerCase()
+
+      .includes(searchQuery.toLowerCase());
+
+    const matchesUser = post.author?.name
+
+      .toLowerCase()
+
+      .includes(filterUser.toLowerCase());
+
+    return matchesSearch && (filterUser === "" || matchesUser);
+  });
   return (
     <>
       <header>
@@ -46,10 +64,24 @@ export default function PostsPage() {
       <section id="hero-home"></section>
       <section id="feed " className="w-full bg-base-100">
         <PostForm />
-        <div className="min-h-screen md:container md:mx-auto  flex sm:flex-col flex-wrap content-center justify-center overflow-x-hidden ">
-          <h1>Feed..</h1>
+        <div className="min-h-screen md:container md:mx-auto flex sm:flex-col flex-wrap content-center justify-center overflow-x-hidden">
+          <input
+            type="text"
+            placeholder="Search by body content"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-6/12 p-2 mb-4 mt-5 border border-gray-300 rounded-md mx-auto"
+          />
 
-          {posts.map((post) => (
+          <input
+            type="text"
+            placeholder="Filter by user"
+            value={filterUser}
+            onChange={(e) => setFilterUser(e.target.value)}
+            className="w-6/12 p-2 mb-4 border border-gray-300 rounded-md mx-auto"
+          />
+
+          {filteredPosts.map((post) => (
             <div
               key={post.id}
               className="w-full min-h- p-2 mb-2.5 sm:w-10/12 flex content-center justify-center"
