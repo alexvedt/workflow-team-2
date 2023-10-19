@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 async function fetchUserPosts(user_name, token) {
   try {
     const response = await fetch(
-      `https://api.noroff.dev/api/v1/social/profiles/${user_name}?_posts`,
+      `https://api.noroff.dev/api/v1/social/profiles/${user_name}/posts`,
       {
         method: "GET",
         headers: {
@@ -13,7 +13,8 @@ async function fetchUserPosts(user_name, token) {
       }
     );
     const data = await response.json();
-    return data.posts || [];
+    console.log(data);
+    return data || [];
   } catch (error) {
     console.error("Error fetching posts:", error);
     return [];
@@ -42,7 +43,7 @@ export default function Profile() {
       return;
     }
 
-    fetch(`https://api.noroff.dev/api/v1/social/profiles/${user_name}?`, {
+    fetch(`https://api.noroff.dev/api/v1/social/profiles/${user_name}/posts?`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -77,6 +78,7 @@ export default function Profile() {
       setPosts([]); // Clear old posts
       fetchUserPosts(user_name, token).then((fetchedPosts) => {
         setPosts(fetchedPosts);
+        console.log(fetchedPosts);
       });
     }
   }, [token, user_name]);
