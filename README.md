@@ -29,13 +29,21 @@ I remain committed to resolving outstanding tasks and continue to collaborate cl
 
 Ridwan:
 
-I implemented the login, registration, and user profiles features, as well as the edit, update, and delete functions. I utilized Tailwind CSS for styling and React for frontend development. I aimed to make the login and registration forms resemble the aesthetic of our post cards. Specifically, the registration form has fields for name, email, and password. If these fields are not completed correctly, error messages appear directly below the respective input field. Once registered, users can seamlessly log in; however, an incorrect password will trigger a 'wrong password' notification.
+I implemented the login, registration, search input, filter input and user profiles features, as well as the edit, update, and delete functions. I utilized Tailwind CSS for styling and React for frontend development. I aimed to make the login and registration forms resemble the aesthetic of our post cards. Specifically, the registration form has fields for name, email, and password. If these fields are not completed correctly, error messages appear directly below the respective input field. Once registered, users can seamlessly log in; however, an incorrect password will trigger a 'wrong password' notification.
 
 The user profiles adopt the same visual design as the post cards, with each user represented by their own card showcasing their name and email. This card design also offers 'follow' and 'unfollow' options.
 
 Though initially not part of my responsibilities, I took on the task of creating the edit, update, and delete functions after a teammate encountered challenges. Despite the time constraints, I ensured these features were functional, although I acknowledge there's room for improvement in their design. Now, users can easily modify their posts.
 
 Additionally, I addressed a bug in the fetch-utils index.jsx, which produced an error related to the trim function. After rectifying this, the website resumed its normal operation.
+
+With the introduction of the filter and search input fields, I have diligently worked to ensure that the design seamlessly integrates with the overall aesthetics of the website. It's not just about aesthetics, but also about functionality and ease of use. The goal was to create an intuitive system where users can effortlessly find the information they're seeking.
+
+The filter/search functionality has been programmed to sift through the content of each post. This means that if a user inputs specific words or phrases they wish to filter out or search for, the system will display posts containing these words. This powerful feature enhances the user experience by providing users with a more tailored browsing experience.
+
+Additionally, there's a functionality to search by username. However, it's important to note that since all usernames are kept anonymous, direct results might not be easily visible or discernible. Nevertheless, this feature has been included to provide more flexibility and options for users in their search endeavors.
+
+
 
 Alex:
 
@@ -46,4 +54,4 @@ Usually my task was debugging every challenge and cleaning up messy commits from
 What I have learned from this is to give people and myself specific time-range for when components and pages have to be completed.  As much as skill in coding and web-development is vital for a team project to work, so is that the team supports each other and communicates well with each other. . We got help from team Zeus on the profile-page since we were so far behind, to understand how to fetch it correctly. 
 
 
-Production deploy: [https://main--thriving-torrone-c43b10.netlify.app/](https://main--thriving-torrone-c43b10.netlify.app/)
+Production deploy: [https://thriving-torrone-c43b10.netlify.app/](https://thriving-torrone-c43b10.netlify.app/)
