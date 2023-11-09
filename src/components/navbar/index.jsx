@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { NAVIGATION } from "../../lib/constants";
 import ThemeSwitch from "../darklightmode";
+import { handleLogout } from "../logout";
 
 export default function Navigation() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -9,13 +10,6 @@ export default function Navigation() {
 
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
-  };
-
-  const handleLogout = () => {
-    console.log("Logging out");
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("user_name");
-    console.log("Logged out");
   };
 
   useEffect(() => {
