@@ -10,7 +10,17 @@ Currently, two official plugins are available:
 
 
 
-  # Insert our test-report
+  # Workflow + testing report
+  by Krystian, Torjus and Alex
+  
+  This was a good challenge. At first we tried splitting up the different tasks between us, but we ended on working on all of them together at school.
+  We tested e2e with Cypress and Unit testing with Vitest. We chose to move away from Jest as the workaround is not as effecient as Vitest. 
+
+  We went through a lot of challenges from the beginning to end. Expecially  mostly with unit testing where we also got some help from Christian and Mo. In the end it was easier to understand the process of whats needed to create a good testing routine. All in all we worked on it physical at school three days to conquer the challenges we had. 
+  With Cypress it was easier to find bugs as you can see the testing in the front-end.
+  Workflows was a bit difficult in a different way, but with bug testing and good help from Mo it was a challenge quickly to overcome.
+
+   In the end of this CA, we have gotten the knowledge to do basics test of our components. 
 /
 
 
