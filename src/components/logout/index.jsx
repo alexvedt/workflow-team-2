@@ -4,3 +4,4 @@ export const handleLogout = () => {
   localStorage.removeItem("user_name");
   console.log("Logged out");
 };
+
